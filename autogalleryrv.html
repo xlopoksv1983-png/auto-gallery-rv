@@ -344,26 +344,38 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     <div class="form-row">
       <div class="form-group">
         <label class="form-label" style="font-size:10px">Лот збір</label>
-        <input class="form-input" id="fLotFee" type="number" placeholder="0" oninput="updateCostSummary()">
+        <div style="display:flex;gap:4px">
+          <input class="form-input" id="fLotFee" type="number" placeholder="0" oninput="updateCostSummary()" style="flex:1">
+          <select id="fLotFeeCur" onchange="updateCostSummary()" style="width:58px;background:var(--surface2);color:var(--text);border:1.5px solid var(--surface3);border-radius:var(--radius-sm);font-size:12px;font-weight:700"><option value="USD">$</option><option value="UAH">₴</option></select>
+        </div>
       </div>
       <div class="form-group">
         <label class="form-label" style="font-size:10px">Доставка суша/море</label>
-        <input class="form-input" id="fDeliverySea" type="number" placeholder="0" oninput="updateCostSummary()">
+        <div style="display:flex;gap:4px">
+          <input class="form-input" id="fDeliverySea" type="number" placeholder="0" oninput="updateCostSummary()" style="flex:1">
+          <select id="fDeliverySeaCur" onchange="updateCostSummary()" style="width:58px;background:var(--surface2);color:var(--text);border:1.5px solid var(--surface3);border-radius:var(--radius-sm);font-size:12px;font-weight:700"><option value="USD">$</option><option value="UAH">₴</option></select>
+        </div>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group">
         <label class="form-label" style="font-size:10px">Доставка Литва—Україна</label>
-        <input class="form-input" id="fDeliveryLtUa" type="number" placeholder="0" oninput="updateCostSummary()">
+        <div style="display:flex;gap:4px">
+          <input class="form-input" id="fDeliveryLtUa" type="number" placeholder="0" oninput="updateCostSummary()" style="flex:1">
+          <select id="fDeliveryLtUaCur" onchange="updateCostSummary()" style="width:58px;background:var(--surface2);color:var(--text);border:1.5px solid var(--surface3);border-radius:var(--radius-sm);font-size:12px;font-weight:700"><option value="USD">$</option><option value="UAH">₴</option></select>
+        </div>
       </div>
       <div class="form-group">
         <label class="form-label" style="font-size:10px">Розмитнення</label>
-        <input class="form-input" id="fCustoms" type="number" placeholder="0" oninput="updateCostSummary()">
+        <div style="display:flex;gap:4px">
+          <input class="form-input" id="fCustoms" type="number" placeholder="0" oninput="updateCostSummary()" style="flex:1">
+          <select id="fCustomsCur" onchange="updateCostSummary()" style="width:58px;background:var(--surface2);color:var(--text);border:1.5px solid var(--surface3);border-radius:var(--radius-sm);font-size:12px;font-weight:700"><option value="USD">$</option><option value="UAH">₴</option></select>
+        </div>
       </div>
     </div>
     <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;margin-top:4px;display:flex;justify-content:space-between;align-items:center">
       <span style="font-size:13px;color:var(--text-dim)">Вартість авто в Україні</span>
-      <span id="fEntryPriceTotal" style="font-size:17px;font-weight:800;color:var(--accent)">$0</span>
+      <span id="fEntryPriceTotal" style="font-size:15px;font-weight:800;color:var(--accent)">$0 · ₴0</span>
     </div>
   </div>
 
@@ -398,7 +410,8 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     <div class="task-list" id="taskList"></div>
     <div class="add-task-row">
       <input class="form-input" id="newTaskText" placeholder="Нова робота...">
-      <input class="form-input" id="newTaskAmount" type="number" placeholder="Сума $" style="max-width:90px">
+      <input class="form-input" id="newTaskAmount" type="number" placeholder="Сума" style="max-width:70px">
+      <select id="newTaskAmountCur" style="width:50px;background:var(--surface2);color:var(--text);border:1.5px solid var(--surface3);border-radius:var(--radius-sm);font-size:12px;font-weight:700"><option value="USD">$</option><option value="UAH">₴</option></select>
       <select id="newTaskWho">
         <option value="">Хто</option>
         <option>Керівник</option>
@@ -409,7 +422,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
       </select>
       <button class="btn-accent" onclick="addTask()" style="padding:8px 14px;border-radius:var(--radius-sm);border:none;cursor:pointer;font-weight:700">+</button>
     </div>
-    <div style="display:flex;justify-content:space-between;padding:8px 2px 0;font-size:13px;color:var(--text-dim)"><span>Сума робіт</span><span id="fTasksTotal" style="font-weight:800;color:var(--text)">$0</span></div>
+    <div style="display:flex;justify-content:space-between;padding:8px 2px 0;font-size:13px;color:var(--text-dim)"><span>Сума робіт</span><span id="fTasksTotal" style="font-weight:800;color:var(--text)">$0 · ₴0</span></div>
   </div>
 
   <div class="form-group">
@@ -417,15 +430,16 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     <div class="task-list" id="purchaseList"></div>
     <div class="add-task-row">
       <input class="form-input" id="newPurchaseText" placeholder="Що куплено...">
-      <input class="form-input" id="newPurchaseAmount" type="number" placeholder="Сума $" style="max-width:90px">
+      <input class="form-input" id="newPurchaseAmount" type="number" placeholder="Сума" style="max-width:70px">
+      <select id="newPurchaseAmountCur" style="width:50px;background:var(--surface2);color:var(--text);border:1.5px solid var(--surface3);border-radius:var(--radius-sm);font-size:12px;font-weight:700"><option value="USD">$</option><option value="UAH">₴</option></select>
       <button class="btn-accent" onclick="addPurchase()" style="padding:8px 14px;border-radius:var(--radius-sm);border:none;cursor:pointer;font-weight:700">+</button>
     </div>
-    <div style="display:flex;justify-content:space-between;padding:8px 2px 0;font-size:13px;color:var(--text-dim)"><span>Сума покупок</span><span id="fPurchasesTotal" style="font-weight:800;color:var(--text)">$0</span></div>
+    <div style="display:flex;justify-content:space-between;padding:8px 2px 0;font-size:13px;color:var(--text-dim)"><span>Сума покупок</span><span id="fPurchasesTotal" style="font-weight:800;color:var(--text)">$0 · ₴0</span></div>
   </div>
 
   <div id="grandTotalSection" style="background:var(--surface2);border:1.5px solid var(--accent);border-radius:var(--radius-sm);padding:14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
     <span style="font-size:14px;font-weight:700">Загальні інвестиції в авто</span>
-    <span id="fGrandTotal" style="font-size:19px;font-weight:800;color:var(--accent)">$0</span>
+    <span id="fGrandTotal" style="font-size:16px;font-weight:800;color:var(--accent)">$0 · ₴0</span>
   </div>
 
   <div class="form-group">
@@ -486,7 +500,7 @@ window.addEventListener('unhandledrejection', function(e) {
 });
 
 // ── CONFIG ──
-let API_URL = localStorage.getItem('agrv_api') || 'https://script.google.com/macros/s/AKfycbw4k3pJIVRmhyxFVyhk8KI9OjmZTJ69aRdNbnXp0SNgf-wxY8Pj9bwCUP1nrX3PxdV5/exec';
+let API_URL = localStorage.getItem('agrv_api') || 'https://script.google.com/macros/s/AKfycbxs0eNHhnmvUYb3Bl87AfUVk4mnkDfkoZQXHjd0GndWHFOCZzan6oNfCpdbQUbGXMAb/exec';
 let workers = [];
 let session = JSON.parse(localStorage.getItem('agrv_session') || 'null');
 
@@ -644,10 +658,12 @@ function renderCars() {
     var daysColor = days > 14 ? 'var(--red)' : days > 7 ? 'var(--orange)' : 'var(--text-muted)';
     var photoHtml = (photos.length ? '<img src="'+photos[0]+'" loading="lazy">' : '🚗') + (tasks.length ? taskRingSvg(done, tasks.length) : '');
     var taskNums = tasks.length ? '<div class="tasks-mini">'+tasks.map(function(t,i){ return '<div class="task-num'+(t.done?' done':'')+'">'+(i+1)+'</div>'; }).join('')+'</div>' : '';
-    var visTotal = canSeeCosts() ? car.grandTotal : (Number(car.tasksTotal||0) + Number(car.purchasesTotal||0));
+    var visUSD = canSeeCosts() ? car.grandTotalUSD : (Number(car.tasksTotalUSD||0) + Number(car.purchasesTotalUSD||0));
+    var visUAH = canSeeCosts() ? car.grandTotalUAH : (Number(car.tasksTotalUAH||0) + Number(car.purchasesTotalUAH||0));
+    var visTotal = (visUSD || visUAH) ? fmtPair(visUSD, visUAH) : '';
     var rgb = STATUS_COLOR[car.status] || '136,136,136';
     var cardStyle = 'border-left:4px solid rgb('+rgb+');background:linear-gradient(90deg, rgba('+rgb+',.12), var(--surface) 12%)';
-    return '<div class="car-card" style="'+cardStyle+'" onclick="openDetail(\''+car.id+'\')"><div class="car-photo">'+photoHtml+'</div><div class="car-body"><div class="car-title">'+(car.make||'')+' '+(car.model||'')+' '+(car.year||'')+'</div><div class="car-meta">'+(car.plate||'—')+(car.responsible?' · '+car.responsible:'')+(visTotal?' · $'+Number(visTotal).toLocaleString():'')+'</div><div class="car-status-row"><span class="status-badge '+(STATUS_CLASS[car.status]||'')+'">'+(car.status||'')+'</span><span class="days-badge" style="color:'+daysColor+'">📅 '+days+' дн.</span></div>'+taskNums+'</div></div>';
+    return '<div class="car-card" style="'+cardStyle+'" onclick="openDetail(\''+car.id+'\')"><div class="car-photo">'+photoHtml+'</div><div class="car-body"><div class="car-title">'+(car.make||'')+' '+(car.model||'')+' '+(car.year||'')+'</div><div class="car-meta">'+(car.plate||'—')+(car.responsible?' · '+car.responsible:'')+(visTotal?' · '+visTotal:'')+'</div><div class="car-status-row"><span class="status-badge '+(STATUS_CLASS[car.status]||'')+'">'+(car.status||'')+'</span><span class="days-badge" style="color:'+daysColor+'">📅 '+days+' дн.</span></div>'+taskNums+'</div></div>';
   }).join('');
 }
 
@@ -665,14 +681,14 @@ function openDetail(id) {
   var ph = document.getElementById('detailPhotos');
   ph.innerHTML = photos.length ? photos.map(function(p){ return '<div class="detail-photo"><img src="'+p+'"></div>'; }).join('') : '<div style="padding:16px;color:var(--text-muted);font-size:13px">Фото немає</div>';
 
-  var taskHtml = tasks.length ? '<div class="detail-section"><div class="detail-section-title">Роботи по авто '+done+'/'+tasks.length+' ('+pct+'%)</div><div class="progress-bar" style="margin-bottom:12px"><div class="progress-fill" style="width:'+pct+'%"></div></div>'+tasks.map(function(t,i){ var amt = t.amount ? ' · $'+Number(t.amount).toLocaleString() : ''; return '<div class="detail-task"><button class="detail-task-check '+(t.done?'done':'')+'" onclick="toggleTaskDetail(\''+car.id+'\','+i+')">'+(t.done?'✓':'')+'</button><div class="detail-task-info"><div class="detail-task-name" style="'+(t.done?'text-decoration:line-through;opacity:.5':'')+'">'+(t.text||'')+'</div><div class="detail-task-who">'+(t.who||'')+(t.who&&amt?' ':'')+amt+(t.done?' · ✅ виконано':'')+'</div></div></div>'; }).join('')+'</div>' : '';
+  var taskHtml = tasks.length ? '<div class="detail-section"><div class="detail-section-title">Роботи по авто '+done+'/'+tasks.length+' ('+pct+'%)</div><div class="progress-bar" style="margin-bottom:12px"><div class="progress-fill" style="width:'+pct+'%"></div></div>'+tasks.map(function(t,i){ var amt = t.amount ? ' · '+fmtAmount(t.amount, t.currency) : ''; return '<div class="detail-task"><button class="detail-task-check '+(t.done?'done':'')+'" onclick="toggleTaskDetail(\''+car.id+'\','+i+')">'+(t.done?'✓':'')+'</button><div class="detail-task-info"><div class="detail-task-name" style="'+(t.done?'text-decoration:line-through;opacity:.5':'')+'">'+(t.text||'')+'</div><div class="detail-task-who">'+(t.who||'')+(t.who&&amt?' ':'')+amt+(t.done?' · ✅ виконано':'')+'</div></div></div>'; }).join('')+'</div>' : '';
   var purchases = Array.isArray(car.purchases) ? car.purchases : [];
   var purchaseHtml = purchases.length ? '<div class="detail-section"><div class="detail-section-title">Покупки по авто</div>'+purchases.map(function(p){ return '<div class="detail-row"><span class="detail-row-label">'+(p.text||'')+'</span><span class="detail-row-value">'+(p.amount?'$'+Number(p.amount).toLocaleString():'—')+'</span></div>'; }).join('')+'</div>' : '';
   var commentHtml = car.comment ? '<div class="detail-section"><div class="detail-section-title">Коментар</div><div class="comment-box">'+car.comment+'</div></div>' : '';
 
-  var costHtml = canSeeCosts() ? '<div class="detail-section"><div class="detail-section-title">💰 Вхідна ціна авто</div><div class="detail-row"><span class="detail-row-label">Лот збір</span><span class="detail-row-value">$'+Number(car.lotFee||0).toLocaleString()+'</span></div><div class="detail-row"><span class="detail-row-label">Доставка суша/море</span><span class="detail-row-value">$'+Number(car.deliverySea||0).toLocaleString()+'</span></div><div class="detail-row"><span class="detail-row-label">Доставка Литва—Україна</span><span class="detail-row-value">$'+Number(car.deliveryLtUa||0).toLocaleString()+'</span></div><div class="detail-row"><span class="detail-row-label">Розмитнення</span><span class="detail-row-value">$'+Number(car.customs||0).toLocaleString()+'</span></div><div class="detail-row" style="border-top:1px solid var(--surface3);padding-top:10px;margin-top:4px"><span class="detail-row-label" style="font-weight:700">Вартість авто в Україні</span><span class="detail-row-value" style="color:var(--accent);font-weight:800">$'+Number(car.entryPrice||0).toLocaleString()+'</span></div></div>' : '';
+  var costHtml = canSeeCosts() ? '<div class="detail-section"><div class="detail-section-title">💰 Вхідна ціна авто</div><div class="detail-row"><span class="detail-row-label">Лот збір</span><span class="detail-row-value">'+fmtAmount(car.lotFee, car.lotFeeCur)+'</span></div><div class="detail-row"><span class="detail-row-label">Доставка суша/море</span><span class="detail-row-value">'+fmtAmount(car.deliverySea, car.deliverySeaCur)+'</span></div><div class="detail-row"><span class="detail-row-label">Доставка Литва—Україна</span><span class="detail-row-value">'+fmtAmount(car.deliveryLtUa, car.deliveryLtUaCur)+'</span></div><div class="detail-row"><span class="detail-row-label">Розмитнення</span><span class="detail-row-value">'+fmtAmount(car.customs, car.customsCur)+'</span></div><div class="detail-row" style="border-top:1px solid var(--surface3);padding-top:10px;margin-top:4px"><span class="detail-row-label" style="font-weight:700">Вартість авто в Україні</span><span class="detail-row-value" style="color:var(--accent);font-weight:800">'+fmtPair(car.entryPriceUSD, car.entryPriceUAH)+'</span></div></div>' : '';
 
-  var summaryHtml = canSeeCosts() ? '<div class="detail-section" style="background:var(--surface2);border:1.5px solid var(--accent);border-radius:var(--radius-sm)"><div class="detail-row"><span class="detail-row-label">Вхідна ціна</span><span class="detail-row-value">$'+Number(car.entryPrice||0).toLocaleString()+'</span></div><div class="detail-row"><span class="detail-row-label">Сума робіт</span><span class="detail-row-value">$'+Number(car.tasksTotal||0).toLocaleString()+'</span></div><div class="detail-row"><span class="detail-row-label">Сума покупок</span><span class="detail-row-value">$'+Number(car.purchasesTotal||0).toLocaleString()+'</span></div><div class="detail-row" style="border-top:1px solid var(--surface3);padding-top:10px;margin-top:4px"><span class="detail-row-label" style="font-size:14px;font-weight:700">Загальні інвестиції</span><span class="detail-row-value" style="font-size:18px;color:var(--accent);font-weight:800">$'+Number(car.grandTotal||0).toLocaleString()+'</span></div></div>' : (car.tasksTotal||car.purchasesTotal ? '<div class="detail-section" style="background:var(--surface2);border-radius:var(--radius-sm)"><div class="detail-row"><span class="detail-row-label">Сума робіт</span><span class="detail-row-value">$'+Number(car.tasksTotal||0).toLocaleString()+'</span></div><div class="detail-row"><span class="detail-row-label">Сума покупок</span><span class="detail-row-value">$'+Number(car.purchasesTotal||0).toLocaleString()+'</span></div></div>' : '');
+  var summaryHtml = canSeeCosts() ? '<div class="detail-section" style="background:var(--surface2);border:1.5px solid var(--accent);border-radius:var(--radius-sm)"><div class="detail-row"><span class="detail-row-label">Вхідна ціна</span><span class="detail-row-value">'+fmtPair(car.entryPriceUSD, car.entryPriceUAH)+'</span></div><div class="detail-row"><span class="detail-row-label">Сума робіт</span><span class="detail-row-value">'+fmtPair(car.tasksTotalUSD, car.tasksTotalUAH)+'</span></div><div class="detail-row"><span class="detail-row-label">Сума покупок</span><span class="detail-row-value">'+fmtPair(car.purchasesTotalUSD, car.purchasesTotalUAH)+'</span></div><div class="detail-row" style="border-top:1px solid var(--surface3);padding-top:10px;margin-top:4px"><span class="detail-row-label" style="font-size:14px;font-weight:700">Загальні інвестиції</span><span class="detail-row-value" style="font-size:16px;color:var(--accent);font-weight:800">'+fmtPair(car.grandTotalUSD, car.grandTotalUAH)+'</span></div></div>' : ((car.tasksTotalUSD||car.tasksTotalUAH||car.purchasesTotalUSD||car.purchasesTotalUAH) ? '<div class="detail-section" style="background:var(--surface2);border-radius:var(--radius-sm)"><div class="detail-row"><span class="detail-row-label">Сума робіт</span><span class="detail-row-value">'+fmtPair(car.tasksTotalUSD, car.tasksTotalUAH)+'</span></div><div class="detail-row"><span class="detail-row-label">Сума покупок</span><span class="detail-row-value">'+fmtPair(car.purchasesTotalUSD, car.purchasesTotalUAH)+'</span></div></div>' : '');
 
   document.getElementById('detailBody').innerHTML = '<div class="detail-section"><div class="detail-section-title">Інформація</div><div class="detail-row"><span class="detail-row-label">Статус</span><span class="status-badge '+(STATUS_CLASS[car.status]||'')+'">'+(car.status||'')+'</span></div><div class="detail-row"><span class="detail-row-label">Марка/Модель</span><span class="detail-row-value">'+(car.make||'—')+' '+(car.model||'')+'</span></div><div class="detail-row"><span class="detail-row-label">Рік</span><span class="detail-row-value">'+(car.year||'—')+'</span></div><div class="detail-row"><span class="detail-row-label">Держномер</span><span class="detail-row-value">'+(car.plate||'—')+'</span></div><div class="detail-row"><span class="detail-row-label">VIN</span><span class="detail-row-value" style="font-size:12px">'+(car.vin||'—')+'</span></div><div class="detail-row"><span class="detail-row-label">Відповідальний</span><span class="detail-row-value">'+(car.responsible||'—')+'</span></div><div class="detail-row"><span class="detail-row-label">Днів в роботі</span><span class="detail-row-value">'+(car.daysInWork||0)+' дн.</span></div></div>'+costHtml+taskHtml+purchaseHtml+summaryHtml+commentHtml;
 
@@ -785,9 +801,15 @@ function openAddModal() {
   document.getElementById('fPlate').value = '';
   document.getElementById('fVin').value = '';
   document.getElementById('fLotFee').value = '';
+  document.getElementById('fLotFeeCur').value = 'USD';
   document.getElementById('fDeliverySea').value = '';
+  document.getElementById('fDeliverySeaCur').value = 'USD';
   document.getElementById('fDeliveryLtUa').value = '';
+  document.getElementById('fDeliveryLtUaCur').value = 'USD';
   document.getElementById('fCustoms').value = '';
+  document.getElementById('fCustomsCur').value = 'USD';
+  document.getElementById('newTaskAmountCur').value = 'USD';
+  document.getElementById('newPurchaseAmountCur').value = 'USD';
   document.getElementById('fStatus').value = 'Щойно куплено';
   document.getElementById('fResponsible').value = '';
   document.getElementById('fComment').value = '';
@@ -811,9 +833,15 @@ function openEditModal(id) {
   document.getElementById('fPlate').value = car.plate||'';
   document.getElementById('fVin').value = car.vin||'';
   document.getElementById('fLotFee').value = car.lotFee||'';
+  document.getElementById('fLotFeeCur').value = car.lotFeeCur||'USD';
   document.getElementById('fDeliverySea').value = car.deliverySea||'';
+  document.getElementById('fDeliverySeaCur').value = car.deliverySeaCur||'USD';
   document.getElementById('fDeliveryLtUa').value = car.deliveryLtUa||'';
+  document.getElementById('fDeliveryLtUaCur').value = car.deliveryLtUaCur||'USD';
   document.getElementById('fCustoms').value = car.customs||'';
+  document.getElementById('fCustomsCur').value = car.customsCur||'USD';
+  document.getElementById('newTaskAmountCur').value = 'USD';
+  document.getElementById('newPurchaseAmountCur').value = 'USD';
   document.getElementById('fStatus').value = car.status||'Щойно куплено';
   document.getElementById('fResponsible').value = car.responsible||'';
   document.getElementById('fComment').value = car.comment||'';
@@ -869,13 +897,23 @@ function renderPhotoGrid() {
 
 function removePhoto(i) { currentPhotos.splice(i,1); renderPhotoGrid(); }
 
+// ── CURRENCY HELPERS ──
+function fmtPair(usd, uah) {
+  var parts = [];
+  if (usd) parts.push('$' + Math.round(usd).toLocaleString());
+  if (uah) parts.push('₴' + Math.round(uah).toLocaleString());
+  return parts.length ? parts.join(' · ') : '$0';
+}
+function fmtAmount(amount, cur) { return (cur === 'UAH' ? '₴' : '$') + Number(amount||0).toLocaleString(); }
+
 // ── TASKS (роботи по авто, з сумою) ──
 function addTask() {
   var text = document.getElementById('newTaskText').value.trim();
   if (!text) return;
   var amount = parseFloat(document.getElementById('newTaskAmount').value) || 0;
+  var currency = document.getElementById('newTaskAmountCur').value;
   var who = document.getElementById('newTaskWho').value;
-  currentTasks.push({ text:text, who:who, amount:amount, done:false });
+  currentTasks.push({ text:text, who:who, amount:amount, currency:currency, done:false });
   document.getElementById('newTaskText').value = '';
   document.getElementById('newTaskAmount').value = '';
   renderTaskList();
@@ -884,7 +922,7 @@ function addTask() {
 
 function renderTaskList() {
   document.getElementById('taskList').innerHTML = currentTasks.map(function(t,i){
-    var amountHtml = t.amount ? '<div class="task-who">$'+Number(t.amount).toLocaleString()+'</div>' : '';
+    var amountHtml = t.amount ? '<div class="task-who">'+fmtAmount(t.amount, t.currency)+'</div>' : '';
     return '<div class="task-item"><button class="task-check '+(t.done?'done':'')+'" onclick="toggleTask('+i+')">'+(t.done?'✓':'')+'</button><div style="flex:1"><div class="task-text" style="'+(t.done?'text-decoration:line-through;opacity:.5':'')+'">'+(t.text||'')+'</div>'+(t.who?'<div class="task-who">'+t.who+(t.done?' · ✅ виконано':'')+'</div>':(t.done?'<div class="task-who">✅ виконано</div>':''))+amountHtml+'</div><button class="task-del" onclick="removeTask('+i+')">✕</button></div>';
   }).join('');
 }
@@ -897,7 +935,8 @@ function addPurchase() {
   var text = document.getElementById('newPurchaseText').value.trim();
   if (!text) return;
   var amount = parseFloat(document.getElementById('newPurchaseAmount').value) || 0;
-  currentPurchases.push({ text:text, amount:amount });
+  var currency = document.getElementById('newPurchaseAmountCur').value;
+  currentPurchases.push({ text:text, amount:amount, currency:currency });
   document.getElementById('newPurchaseText').value = '';
   document.getElementById('newPurchaseAmount').value = '';
   renderPurchaseList();
@@ -906,27 +945,36 @@ function addPurchase() {
 
 function renderPurchaseList() {
   document.getElementById('purchaseList').innerHTML = currentPurchases.map(function(p,i){
-    return '<div class="task-item"><div style="flex:1"><div class="task-text">'+(p.text||'')+'</div>'+(p.amount?'<div class="task-who">$'+Number(p.amount).toLocaleString()+'</div>':'')+'</div><button class="task-del" onclick="removePurchase('+i+')">✕</button></div>';
+    return '<div class="task-item"><div style="flex:1"><div class="task-text">'+(p.text||'')+'</div>'+(p.amount?'<div class="task-who">'+fmtAmount(p.amount, p.currency)+'</div>':'')+'</div><button class="task-del" onclick="removePurchase('+i+')">✕</button></div>';
   }).join('');
 }
 
 function removePurchase(i) { currentPurchases.splice(i,1); renderPurchaseList(); updateCostSummary(); }
 
-// ── COST SUMMARY (вхідна ціна + роботи + покупки) ──
+// ── COST SUMMARY (вхідна ціна + роботи + покупки — $ і ₴ рахуються окремо, без конвертації) ──
+function amtIn(id, curId, currency) {
+  var v = parseFloat(document.getElementById(id).value) || 0;
+  return document.getElementById(curId).value === currency ? v : 0;
+}
 function updateCostSummary() {
-  var lotFee = parseFloat(document.getElementById('fLotFee').value) || 0;
-  var deliverySea = parseFloat(document.getElementById('fDeliverySea').value) || 0;
-  var deliveryLtUa = parseFloat(document.getElementById('fDeliveryLtUa').value) || 0;
-  var customs = parseFloat(document.getElementById('fCustoms').value) || 0;
-  var entryPrice = lotFee + deliverySea + deliveryLtUa + customs;
-  var tasksTotal = currentTasks.reduce(function(s,t){ return s + (Number(t.amount)||0); }, 0);
-  var purchasesTotal = currentPurchases.reduce(function(s,p){ return s + (Number(p.amount)||0); }, 0);
-  var grandTotal = entryPrice + tasksTotal + purchasesTotal;
-  document.getElementById('fEntryPriceTotal').textContent = '$' + entryPrice.toLocaleString();
-  document.getElementById('fTasksTotal').textContent = '$' + tasksTotal.toLocaleString();
-  document.getElementById('fPurchasesTotal').textContent = '$' + purchasesTotal.toLocaleString();
-  document.getElementById('fGrandTotal').textContent = '$' + grandTotal.toLocaleString();
-  return { entryPrice:entryPrice, tasksTotal:tasksTotal, purchasesTotal:purchasesTotal, grandTotal:grandTotal };
+  var entryPriceUSD = amtIn('fLotFee','fLotFeeCur','USD') + amtIn('fDeliverySea','fDeliverySeaCur','USD') + amtIn('fDeliveryLtUa','fDeliveryLtUaCur','USD') + amtIn('fCustoms','fCustomsCur','USD');
+  var entryPriceUAH = amtIn('fLotFee','fLotFeeCur','UAH') + amtIn('fDeliverySea','fDeliverySeaCur','UAH') + amtIn('fDeliveryLtUa','fDeliveryLtUaCur','UAH') + amtIn('fCustoms','fCustomsCur','UAH');
+  var tasksTotalUSD = currentTasks.reduce(function(s,t){ return s + (t.currency!=='UAH' ? (Number(t.amount)||0) : 0); }, 0);
+  var tasksTotalUAH = currentTasks.reduce(function(s,t){ return s + (t.currency==='UAH' ? (Number(t.amount)||0) : 0); }, 0);
+  var purchasesTotalUSD = currentPurchases.reduce(function(s,p){ return s + (p.currency!=='UAH' ? (Number(p.amount)||0) : 0); }, 0);
+  var purchasesTotalUAH = currentPurchases.reduce(function(s,p){ return s + (p.currency==='UAH' ? (Number(p.amount)||0) : 0); }, 0);
+  var grandTotalUSD = entryPriceUSD + tasksTotalUSD + purchasesTotalUSD;
+  var grandTotalUAH = entryPriceUAH + tasksTotalUAH + purchasesTotalUAH;
+  document.getElementById('fEntryPriceTotal').textContent = fmtPair(entryPriceUSD, entryPriceUAH);
+  document.getElementById('fTasksTotal').textContent = fmtPair(tasksTotalUSD, tasksTotalUAH);
+  document.getElementById('fPurchasesTotal').textContent = fmtPair(purchasesTotalUSD, purchasesTotalUAH);
+  document.getElementById('fGrandTotal').textContent = fmtPair(grandTotalUSD, grandTotalUAH);
+  return {
+    entryPriceUSD:entryPriceUSD, entryPriceUAH:entryPriceUAH,
+    tasksTotalUSD:tasksTotalUSD, tasksTotalUAH:tasksTotalUAH,
+    purchasesTotalUSD:purchasesTotalUSD, purchasesTotalUAH:purchasesTotalUAH,
+    grandTotalUSD:grandTotalUSD, grandTotalUAH:grandTotalUAH
+  };
 }
 
 // ── SAVE/DELETE ──
@@ -948,13 +996,21 @@ async function saveCar() {
     plate: document.getElementById('fPlate').value,
     vin: document.getElementById('fVin').value,
     lotFee: document.getElementById('fLotFee').value || 0,
+    lotFeeCur: document.getElementById('fLotFeeCur').value,
     deliverySea: document.getElementById('fDeliverySea').value || 0,
+    deliverySeaCur: document.getElementById('fDeliverySeaCur').value,
     deliveryLtUa: document.getElementById('fDeliveryLtUa').value || 0,
+    deliveryLtUaCur: document.getElementById('fDeliveryLtUaCur').value,
     customs: document.getElementById('fCustoms').value || 0,
-    entryPrice: sums.entryPrice,
-    tasksTotal: sums.tasksTotal,
-    purchasesTotal: sums.purchasesTotal,
-    grandTotal: sums.grandTotal,
+    customsCur: document.getElementById('fCustomsCur').value,
+    entryPriceUSD: sums.entryPriceUSD,
+    entryPriceUAH: sums.entryPriceUAH,
+    tasksTotalUSD: sums.tasksTotalUSD,
+    tasksTotalUAH: sums.tasksTotalUAH,
+    purchasesTotalUSD: sums.purchasesTotalUSD,
+    purchasesTotalUAH: sums.purchasesTotalUAH,
+    grandTotalUSD: sums.grandTotalUSD,
+    grandTotalUAH: sums.grandTotalUAH,
     status: document.getElementById('fStatus').value,
     responsible: document.getElementById('fResponsible').value,
     comment: document.getElementById('fComment').value,
