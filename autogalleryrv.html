@@ -343,39 +343,27 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     <label class="form-label">💰 Вхідна ціна авто</label>
     <div class="form-row">
       <div class="form-group">
-        <label class="form-label" style="font-size:10px">Лот збір</label>
-        <div style="display:flex;gap:4px">
-          <input class="form-input" id="fLotFee" type="number" placeholder="0" oninput="updateCostSummary()" style="flex:1">
-          <select id="fLotFeeCur" onchange="updateCostSummary()" style="width:58px;background:var(--surface2);color:var(--text);border:1.5px solid var(--surface3);border-radius:var(--radius-sm);font-size:12px;font-weight:700"><option value="USD">$</option><option value="UAH">₴</option></select>
-        </div>
+        <label class="form-label" style="font-size:10px">Лот збір $</label>
+        <input class="form-input" id="fLotFee" type="number" placeholder="0" oninput="updateCostSummary()">
       </div>
       <div class="form-group">
-        <label class="form-label" style="font-size:10px">Доставка суша/море</label>
-        <div style="display:flex;gap:4px">
-          <input class="form-input" id="fDeliverySea" type="number" placeholder="0" oninput="updateCostSummary()" style="flex:1">
-          <select id="fDeliverySeaCur" onchange="updateCostSummary()" style="width:58px;background:var(--surface2);color:var(--text);border:1.5px solid var(--surface3);border-radius:var(--radius-sm);font-size:12px;font-weight:700"><option value="USD">$</option><option value="UAH">₴</option></select>
-        </div>
+        <label class="form-label" style="font-size:10px">Суша/море $</label>
+        <input class="form-input" id="fDeliverySea" type="number" placeholder="0" oninput="updateCostSummary()">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group">
-        <label class="form-label" style="font-size:10px">Доставка Литва—Україна</label>
-        <div style="display:flex;gap:4px">
-          <input class="form-input" id="fDeliveryLtUa" type="number" placeholder="0" oninput="updateCostSummary()" style="flex:1">
-          <select id="fDeliveryLtUaCur" onchange="updateCostSummary()" style="width:58px;background:var(--surface2);color:var(--text);border:1.5px solid var(--surface3);border-radius:var(--radius-sm);font-size:12px;font-weight:700"><option value="USD">$</option><option value="UAH">₴</option></select>
-        </div>
+        <label class="form-label" style="font-size:10px">Доставка Клайпеда $</label>
+        <input class="form-input" id="fDeliveryLtUa" type="number" placeholder="0" oninput="updateCostSummary()">
       </div>
       <div class="form-group">
-        <label class="form-label" style="font-size:10px">Розмитнення</label>
-        <div style="display:flex;gap:4px">
-          <input class="form-input" id="fCustoms" type="number" placeholder="0" oninput="updateCostSummary()" style="flex:1">
-          <select id="fCustomsCur" onchange="updateCostSummary()" style="width:58px;background:var(--surface2);color:var(--text);border:1.5px solid var(--surface3);border-radius:var(--radius-sm);font-size:12px;font-weight:700"><option value="USD">$</option><option value="UAH">₴</option></select>
-        </div>
+        <label class="form-label" style="font-size:10px">Розмитнення $</label>
+        <input class="form-input" id="fCustoms" type="number" placeholder="0" oninput="updateCostSummary()">
       </div>
     </div>
     <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;margin-top:4px;display:flex;justify-content:space-between;align-items:center">
-      <span style="font-size:13px;color:var(--text-dim)">Вартість авто в Україні</span>
-      <span id="fEntryPriceTotal" style="font-size:15px;font-weight:800;color:var(--accent)">$0 · ₴0</span>
+      <span style="font-size:13px;color:var(--text-dim)">Вартість авто в Україні (без ремонту)</span>
+      <span id="fEntryPriceTotal" style="font-size:15px;font-weight:800;color:var(--accent)">$0</span>
     </div>
   </div>
 
@@ -437,9 +425,15 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     <div style="display:flex;justify-content:space-between;padding:8px 2px 0;font-size:13px;color:var(--text-dim)"><span>Сума покупок</span><span id="fPurchasesTotal" style="font-weight:800;color:var(--text)">$0 · ₴0</span></div>
   </div>
 
-  <div id="grandTotalSection" style="background:var(--surface2);border:1.5px solid var(--accent);border-radius:var(--radius-sm);padding:14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-    <span style="font-size:14px;font-weight:700">Загальні інвестиції в авто</span>
-    <span id="fGrandTotal" style="font-size:16px;font-weight:800;color:var(--accent)">$0 · ₴0</span>
+  <div id="grandTotalSection" style="background:var(--surface2);border:1.5px solid var(--accent);border-radius:var(--radius-sm);padding:14px;margin-bottom:16px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span style="font-size:13px;color:var(--text-dim)">Вартість авто в Україні (без ремонту)</span>
+      <span id="fEntryPriceTotal2" style="font-size:15px;font-weight:800;color:var(--text)">$0</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--surface3);padding-top:10px;margin-top:10px">
+      <span style="font-size:14px;font-weight:700">Вартість авто в Україні (з ремонтом)</span>
+      <span id="fGrandTotal" style="font-size:16px;font-weight:800;color:var(--accent)">$0</span>
+    </div>
   </div>
 
   <div class="form-group">
@@ -662,7 +656,7 @@ function renderCars() {
     var visUAH = canSeeCosts() ? car.grandTotalUAH : (Number(car.tasksTotalUAH||0) + Number(car.purchasesTotalUAH||0));
     var visTotal = (visUSD || visUAH) ? fmtPair(visUSD, visUAH) : '';
     var rgb = STATUS_COLOR[car.status] || '136,136,136';
-    var cardStyle = 'border-left:4px solid rgb('+rgb+');background:linear-gradient(90deg, rgba('+rgb+',.12), var(--surface) 12%)';
+    var cardStyle = 'border:2.5px solid rgb('+rgb+');background:var(--surface)';
     return '<div class="car-card" style="'+cardStyle+'" onclick="openDetail(\''+car.id+'\')"><div class="car-photo">'+photoHtml+'</div><div class="car-body"><div class="car-title">'+(car.make||'')+' '+(car.model||'')+' '+(car.year||'')+'</div><div class="car-meta">'+(car.plate||'—')+(car.responsible?' · '+car.responsible:'')+(visTotal?' · '+visTotal:'')+'</div><div class="car-status-row"><span class="status-badge '+(STATUS_CLASS[car.status]||'')+'">'+(car.status||'')+'</span><span class="days-badge" style="color:'+daysColor+'">📅 '+days+' дн.</span></div>'+taskNums+'</div></div>';
   }).join('');
 }
@@ -686,9 +680,10 @@ function openDetail(id) {
   var purchaseHtml = purchases.length ? '<div class="detail-section"><div class="detail-section-title">Покупки по авто</div>'+purchases.map(function(p){ return '<div class="detail-row"><span class="detail-row-label">'+(p.text||'')+'</span><span class="detail-row-value">'+(p.amount?'$'+Number(p.amount).toLocaleString():'—')+'</span></div>'; }).join('')+'</div>' : '';
   var commentHtml = car.comment ? '<div class="detail-section"><div class="detail-section-title">Коментар</div><div class="comment-box">'+car.comment+'</div></div>' : '';
 
-  var costHtml = canSeeCosts() ? '<div class="detail-section"><div class="detail-section-title">💰 Вхідна ціна авто</div><div class="detail-row"><span class="detail-row-label">Лот збір</span><span class="detail-row-value">'+fmtAmount(car.lotFee, car.lotFeeCur)+'</span></div><div class="detail-row"><span class="detail-row-label">Доставка суша/море</span><span class="detail-row-value">'+fmtAmount(car.deliverySea, car.deliverySeaCur)+'</span></div><div class="detail-row"><span class="detail-row-label">Доставка Литва—Україна</span><span class="detail-row-value">'+fmtAmount(car.deliveryLtUa, car.deliveryLtUaCur)+'</span></div><div class="detail-row"><span class="detail-row-label">Розмитнення</span><span class="detail-row-value">'+fmtAmount(car.customs, car.customsCur)+'</span></div><div class="detail-row" style="border-top:1px solid var(--surface3);padding-top:10px;margin-top:4px"><span class="detail-row-label" style="font-weight:700">Вартість авто в Україні</span><span class="detail-row-value" style="color:var(--accent);font-weight:800">'+fmtPair(car.entryPriceUSD, car.entryPriceUAH)+'</span></div></div>' : '';
+  var costHtml = canSeeCosts() ? '<div class="detail-section"><div class="detail-section-title">💰 Вхідна ціна авто</div><div class="detail-row"><span class="detail-row-label">Лот збір</span><span class="detail-row-value">$'+Number(car.lotFee||0).toLocaleString()+'</span></div><div class="detail-row"><span class="detail-row-label">Суша/море</span><span class="detail-row-value">$'+Number(car.deliverySea||0).toLocaleString()+'</span></div><div class="detail-row"><span class="detail-row-label">Доставка Клайпеда</span><span class="detail-row-value">$'+Number(car.deliveryLtUa||0).toLocaleString()+'</span></div><div class="detail-row"><span class="detail-row-label">Розмитнення</span><span class="detail-row-value">$'+Number(car.customs||0).toLocaleString()+'</span></div></div>' : '';
 
-  var summaryHtml = canSeeCosts() ? '<div class="detail-section" style="background:var(--surface2);border:1.5px solid var(--accent);border-radius:var(--radius-sm)"><div class="detail-row"><span class="detail-row-label">Вхідна ціна</span><span class="detail-row-value">'+fmtPair(car.entryPriceUSD, car.entryPriceUAH)+'</span></div><div class="detail-row"><span class="detail-row-label">Сума робіт</span><span class="detail-row-value">'+fmtPair(car.tasksTotalUSD, car.tasksTotalUAH)+'</span></div><div class="detail-row"><span class="detail-row-label">Сума покупок</span><span class="detail-row-value">'+fmtPair(car.purchasesTotalUSD, car.purchasesTotalUAH)+'</span></div><div class="detail-row" style="border-top:1px solid var(--surface3);padding-top:10px;margin-top:4px"><span class="detail-row-label" style="font-size:14px;font-weight:700">Загальні інвестиції</span><span class="detail-row-value" style="font-size:16px;color:var(--accent);font-weight:800">'+fmtPair(car.grandTotalUSD, car.grandTotalUAH)+'</span></div></div>' : ((car.tasksTotalUSD||car.tasksTotalUAH||car.purchasesTotalUSD||car.purchasesTotalUAH) ? '<div class="detail-section" style="background:var(--surface2);border-radius:var(--radius-sm)"><div class="detail-row"><span class="detail-row-label">Сума робіт</span><span class="detail-row-value">'+fmtPair(car.tasksTotalUSD, car.tasksTotalUAH)+'</span></div><div class="detail-row"><span class="detail-row-label">Сума покупок</span><span class="detail-row-value">'+fmtPair(car.purchasesTotalUSD, car.purchasesTotalUAH)+'</span></div></div>' : '');
+  var grandUAH = Number(car.tasksTotalUAH||0) + Number(car.purchasesTotalUAH||0);
+  var summaryHtml = canSeeCosts() ? '<div class="detail-section" style="background:var(--surface2);border:1.5px solid var(--accent);border-radius:var(--radius-sm)"><div class="detail-row"><span class="detail-row-label">Вартість авто в Україні (без ремонту)</span><span class="detail-row-value">$'+Number(car.entryPriceUSD||0).toLocaleString()+'</span></div><div class="detail-row" style="border-top:1px solid var(--surface3);padding-top:10px;margin-top:4px"><span class="detail-row-label" style="font-size:14px;font-weight:700">Вартість авто в Україні (з ремонтом)</span><span class="detail-row-value" style="font-size:16px;color:var(--accent);font-weight:800">'+fmtPair(car.grandTotalUSD, grandUAH)+'</span></div></div>' : ((car.tasksTotalUSD||car.tasksTotalUAH||car.purchasesTotalUSD||car.purchasesTotalUAH) ? '<div class="detail-section" style="background:var(--surface2);border-radius:var(--radius-sm)"><div class="detail-row"><span class="detail-row-label">Сума робіт</span><span class="detail-row-value">'+fmtPair(car.tasksTotalUSD, car.tasksTotalUAH)+'</span></div><div class="detail-row"><span class="detail-row-label">Сума покупок</span><span class="detail-row-value">'+fmtPair(car.purchasesTotalUSD, car.purchasesTotalUAH)+'</span></div></div>' : '');
 
   document.getElementById('detailBody').innerHTML = '<div class="detail-section"><div class="detail-section-title">Інформація</div><div class="detail-row"><span class="detail-row-label">Статус</span><span class="status-badge '+(STATUS_CLASS[car.status]||'')+'">'+(car.status||'')+'</span></div><div class="detail-row"><span class="detail-row-label">Марка/Модель</span><span class="detail-row-value">'+(car.make||'—')+' '+(car.model||'')+'</span></div><div class="detail-row"><span class="detail-row-label">Рік</span><span class="detail-row-value">'+(car.year||'—')+'</span></div><div class="detail-row"><span class="detail-row-label">Держномер</span><span class="detail-row-value">'+(car.plate||'—')+'</span></div><div class="detail-row"><span class="detail-row-label">VIN</span><span class="detail-row-value" style="font-size:12px">'+(car.vin||'—')+'</span></div><div class="detail-row"><span class="detail-row-label">Відповідальний</span><span class="detail-row-value">'+(car.responsible||'—')+'</span></div><div class="detail-row"><span class="detail-row-label">Днів в роботі</span><span class="detail-row-value">'+(car.daysInWork||0)+' дн.</span></div></div>'+costHtml+taskHtml+purchaseHtml+summaryHtml+commentHtml;
 
@@ -785,11 +780,10 @@ function getModelValue() {
 // ── MODAL ──
 function applyCostVisibility() {
   var show = canSeeCosts() ? 'block' : 'none';
-  var showFlex = canSeeCosts() ? 'flex' : 'none';
   var el1 = document.getElementById('entryPriceSection');
   var el2 = document.getElementById('grandTotalSection');
   if (el1) el1.style.display = show;
-  if (el2) el2.style.display = showFlex;
+  if (el2) el2.style.display = show;
 }
 
 function openAddModal() {
@@ -801,13 +795,9 @@ function openAddModal() {
   document.getElementById('fPlate').value = '';
   document.getElementById('fVin').value = '';
   document.getElementById('fLotFee').value = '';
-  document.getElementById('fLotFeeCur').value = 'USD';
   document.getElementById('fDeliverySea').value = '';
-  document.getElementById('fDeliverySeaCur').value = 'USD';
   document.getElementById('fDeliveryLtUa').value = '';
-  document.getElementById('fDeliveryLtUaCur').value = 'USD';
   document.getElementById('fCustoms').value = '';
-  document.getElementById('fCustomsCur').value = 'USD';
   document.getElementById('newTaskAmountCur').value = 'USD';
   document.getElementById('newPurchaseAmountCur').value = 'USD';
   document.getElementById('fStatus').value = 'Щойно куплено';
@@ -833,13 +823,9 @@ function openEditModal(id) {
   document.getElementById('fPlate').value = car.plate||'';
   document.getElementById('fVin').value = car.vin||'';
   document.getElementById('fLotFee').value = car.lotFee||'';
-  document.getElementById('fLotFeeCur').value = car.lotFeeCur||'USD';
   document.getElementById('fDeliverySea').value = car.deliverySea||'';
-  document.getElementById('fDeliverySeaCur').value = car.deliverySeaCur||'USD';
   document.getElementById('fDeliveryLtUa').value = car.deliveryLtUa||'';
-  document.getElementById('fDeliveryLtUaCur').value = car.deliveryLtUaCur||'USD';
   document.getElementById('fCustoms').value = car.customs||'';
-  document.getElementById('fCustomsCur').value = car.customsCur||'USD';
   document.getElementById('newTaskAmountCur').value = 'USD';
   document.getElementById('newPurchaseAmountCur').value = 'USD';
   document.getElementById('fStatus').value = car.status||'Щойно куплено';
@@ -952,25 +938,23 @@ function renderPurchaseList() {
 function removePurchase(i) { currentPurchases.splice(i,1); renderPurchaseList(); updateCostSummary(); }
 
 // ── COST SUMMARY (вхідна ціна + роботи + покупки — $ і ₴ рахуються окремо, без конвертації) ──
-function amtIn(id, curId, currency) {
-  var v = parseFloat(document.getElementById(id).value) || 0;
-  return document.getElementById(curId).value === currency ? v : 0;
-}
+function amtVal(id) { return parseFloat(document.getElementById(id).value) || 0; }
 function updateCostSummary() {
-  var entryPriceUSD = amtIn('fLotFee','fLotFeeCur','USD') + amtIn('fDeliverySea','fDeliverySeaCur','USD') + amtIn('fDeliveryLtUa','fDeliveryLtUaCur','USD') + amtIn('fCustoms','fCustomsCur','USD');
-  var entryPriceUAH = amtIn('fLotFee','fLotFeeCur','UAH') + amtIn('fDeliverySea','fDeliverySeaCur','UAH') + amtIn('fDeliveryLtUa','fDeliveryLtUaCur','UAH') + amtIn('fCustoms','fCustomsCur','UAH');
+  var entryPriceUSD = amtVal('fLotFee') + amtVal('fDeliverySea') + amtVal('fDeliveryLtUa') + amtVal('fCustoms');
   var tasksTotalUSD = currentTasks.reduce(function(s,t){ return s + (t.currency!=='UAH' ? (Number(t.amount)||0) : 0); }, 0);
   var tasksTotalUAH = currentTasks.reduce(function(s,t){ return s + (t.currency==='UAH' ? (Number(t.amount)||0) : 0); }, 0);
   var purchasesTotalUSD = currentPurchases.reduce(function(s,p){ return s + (p.currency!=='UAH' ? (Number(p.amount)||0) : 0); }, 0);
   var purchasesTotalUAH = currentPurchases.reduce(function(s,p){ return s + (p.currency==='UAH' ? (Number(p.amount)||0) : 0); }, 0);
   var grandTotalUSD = entryPriceUSD + tasksTotalUSD + purchasesTotalUSD;
-  var grandTotalUAH = entryPriceUAH + tasksTotalUAH + purchasesTotalUAH;
-  document.getElementById('fEntryPriceTotal').textContent = fmtPair(entryPriceUSD, entryPriceUAH);
+  var grandTotalUAH = tasksTotalUAH + purchasesTotalUAH;
+  document.getElementById('fEntryPriceTotal').textContent = '$' + Math.round(entryPriceUSD).toLocaleString();
+  var el2 = document.getElementById('fEntryPriceTotal2');
+  if (el2) el2.textContent = '$' + Math.round(entryPriceUSD).toLocaleString();
   document.getElementById('fTasksTotal').textContent = fmtPair(tasksTotalUSD, tasksTotalUAH);
   document.getElementById('fPurchasesTotal').textContent = fmtPair(purchasesTotalUSD, purchasesTotalUAH);
   document.getElementById('fGrandTotal').textContent = fmtPair(grandTotalUSD, grandTotalUAH);
   return {
-    entryPriceUSD:entryPriceUSD, entryPriceUAH:entryPriceUAH,
+    entryPriceUSD:entryPriceUSD, entryPriceUAH:0,
     tasksTotalUSD:tasksTotalUSD, tasksTotalUAH:tasksTotalUAH,
     purchasesTotalUSD:purchasesTotalUSD, purchasesTotalUAH:purchasesTotalUAH,
     grandTotalUSD:grandTotalUSD, grandTotalUAH:grandTotalUAH
@@ -996,13 +980,13 @@ async function saveCar() {
     plate: document.getElementById('fPlate').value,
     vin: document.getElementById('fVin').value,
     lotFee: document.getElementById('fLotFee').value || 0,
-    lotFeeCur: document.getElementById('fLotFeeCur').value,
+    lotFeeCur: 'USD',
     deliverySea: document.getElementById('fDeliverySea').value || 0,
-    deliverySeaCur: document.getElementById('fDeliverySeaCur').value,
+    deliverySeaCur: 'USD',
     deliveryLtUa: document.getElementById('fDeliveryLtUa').value || 0,
-    deliveryLtUaCur: document.getElementById('fDeliveryLtUaCur').value,
+    deliveryLtUaCur: 'USD',
     customs: document.getElementById('fCustoms').value || 0,
-    customsCur: document.getElementById('fCustomsCur').value,
+    customsCur: 'USD',
     entryPriceUSD: sums.entryPriceUSD,
     entryPriceUAH: sums.entryPriceUAH,
     tasksTotalUSD: sums.tasksTotalUSD,
@@ -1188,7 +1172,7 @@ function compactCarCard(car) {
   var thumbHtml = photos.length?'<img src="'+photos[0]+'" style="width:100%;height:100%;object-fit:cover">':'🚗';
   var taskNums = tasks.length ? '<div class="tasks-mini" style="margin-top:8px">'+tasks.map(function(t,i){ return '<div class="task-num'+(t.done?' done':'')+'" style="width:20px;height:20px;font-size:10px">'+(i+1)+'</div>'; }).join('')+'</div>' : '';
   var rgb = STATUS_COLOR[car.status] || '136,136,136';
-  var cardStyle = 'margin-bottom:8px;position:relative;border-left:4px solid rgb('+rgb+');background:linear-gradient(90deg, rgba('+rgb+',.12), var(--surface) 12%)';
+  var cardStyle = 'margin-bottom:8px;position:relative;border:2.5px solid rgb('+rgb+');background:var(--surface)';
   return '<div class="car-card" onclick="openDetail(\''+car.id+'\')" style="'+cardStyle+'">'+pctBadge+'<div style="padding:12px"><div style="display:flex;gap:12px"><div style="width:70px;height:70px;border-radius:8px;overflow:hidden;background:var(--surface2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:24px">'+thumbHtml+'</div><div style="flex:1;padding-right:44px"><div style="font-size:15px;font-weight:700">'+(car.make||'')+' '+(car.model||'')+' '+(car.year||'')+'</div><div style="font-size:12px;color:var(--text-dim);margin-top:2px">'+(car.plate||'—')+(car.responsible?' · '+car.responsible:'')+'</div><div style="font-size:12px;color:var(--text-dim);margin-top:2px">'+(car.daysInWork||0)+' дн.</div></div></div>'+taskNums+'</div></div>';
 }
 
