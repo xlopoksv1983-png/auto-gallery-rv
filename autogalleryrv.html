@@ -789,6 +789,7 @@ function applyCostVisibility() {
 function openAddModal() {
   editId = null; currentPhotos = []; currentTasks = []; currentPurchases = [];
   document.getElementById('modalTitle').textContent = 'Нове авто';
+  alert('🔍 ДІАГНОСТИКА\nsession: ' + JSON.stringify(session) + '\ncanSeeCosts(): ' + canSeeCosts() + '\nAPI_URL встановлено: ' + !!API_URL);
   populateMakeSelect('');
   populateModelSelect('', '');
   populateYearSelect('');
