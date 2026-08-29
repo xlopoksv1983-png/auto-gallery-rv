@@ -1333,6 +1333,7 @@ function logout() {
 
 async function verifySessionInBackground() {
   if (!session || !API_URL) return;
+  var oldRole = session.role;
   var res = await apiCall({ action: 'checkSession', workerId: session.workerId });
   if (res && res.error === 'revoked') {
     session = null;
@@ -1342,6 +1343,12 @@ async function verifySessionInBackground() {
     session = { workerId: session.workerId, name: res.name, isManager: res.isManager, role: res.role || 'worker' };
     localStorage.setItem('agrv_session', JSON.stringify(session));
     updateManagerUI();
+    if (session.role !== oldRole) {
+      var modalOpen = document.getElementById('modalOverlay').classList.contains('open');
+      if (modalOpen) applyCostVisibility();
+      renderCars();
+      if (document.getElementById('screen-settings').classList.contains('active')) renderWorkersSettings();
+    }
   }
 }
 
