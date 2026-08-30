@@ -494,7 +494,7 @@ window.addEventListener('unhandledrejection', function(e) {
 });
 
 // ── CONFIG ──
-let API_URL = localStorage.getItem('agrv_api') || 'https://script.google.com/macros/s/AKfycbxs0eNHhnmvUYb3Bl87AfUVk4mnkDfkoZQXHjd0GndWHFOCZzan6oNfCpdbQUbGXMAb/exec';
+let API_URL = localStorage.getItem('agrv_api') || 'https://script.google.com/macros/s/AKfycbwrqZI-Oaq-SujLxK7p4PpVsQAagVJEUsV0yBMU6YY4y45rZO5X0F9K7bhhtlkdmh5e/exec';
 let workers = [];
 let session = JSON.parse(localStorage.getItem('agrv_session') || 'null');
 
@@ -789,7 +789,6 @@ function applyCostVisibility() {
 function openAddModal() {
   editId = null; currentPhotos = []; currentTasks = []; currentPurchases = [];
   document.getElementById('modalTitle').textContent = 'Нове авто';
-  alert('🔍 ДІАГНОСТИКА\nsession: ' + JSON.stringify(session) + '\ncanSeeCosts(): ' + canSeeCosts() + '\nAPI_URL встановлено: ' + !!API_URL);
   populateMakeSelect('');
   populateModelSelect('', '');
   populateYearSelect('');
